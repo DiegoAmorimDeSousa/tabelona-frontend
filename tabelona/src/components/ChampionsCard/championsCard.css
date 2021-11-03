@@ -1,0 +1,75 @@
+.champions-card-box {
+    max-width: 1260px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 10px;
+}
+
+.champions-card {
+    display: flex;
+}
+
+.title, .time {
+    display: flex;
+}
+
+.champions-card-title {
+    background: #5F9EA0;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+}
+
+.champions-card-time {
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+}
+
+.pos {
+    min-width: 80px;
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+    border-left: solid 1px black;
+}
+
+.name-torney {
+    min-width: 300px;
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+    border-left: solid 1px black;
+}
+
+.quantity {
+    min-width: 60px;
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+    border-left: solid 1px black;
+    border-right: solid 1px black;
+}
+
+.time-torney {
+    justify-content: flex-start;
+}
+
+.time-torney img {
+    width: 25px;
+    margin: 0 10px;
+}
+
+.first {
+    background: rgb(30, 88, 30)
+}
+
+.second {
+    background: rgb(197, 197, 15);
+}
