@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-code7accounts-dev-102756-authRole",
+            "UnauthRoleArn": "arn:aws:iam::241864543210:role/amplify-code7accounts-dev-102756-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::241864543210:role/amplify-code7accounts-dev-102756-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-code7accounts-dev-102756-deployment",
+            "UnauthRoleName": "amplify-code7accounts-dev-102756-unauthRole",
+            "StackName": "amplify-code7accounts-dev-102756",
+            "StackId": "arn:aws:cloudformation:us-west-2:241864543210:stack/amplify-code7accounts-dev-102756/5c4be320-b09e-11ea-a0a3-02a1b3d9eece",
+            "AmplifyAppId": "d3gzqu0p1d327j"
+        },
+        "categories": {
+            "auth": {
+                "code7accountsf741e6c9": {}
+            }
+        }
+    }
+}

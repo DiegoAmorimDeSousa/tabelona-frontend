@@ -1,0 +1,43 @@
+.create-time-button, .save-time {
+    margin-top: 10px;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    background: #e5aa17;
+    font-weight: bold;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+}
+
+.create-time-button:hover, .save-time:hover {
+    background: #a57704;
+}
+
+label{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+input{
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(141, 141, 141);
+    outline: none;
+    border: none;
+    border-bottom: solid 1px black;
+}
+
+.button-save-time {
+    display: flex;
+    justify-content: end;
+}
+
+.save-time{
+    width: 100px;
+    margin-right: 60px;
+    display: flex;
+    justify-content: center;
+}

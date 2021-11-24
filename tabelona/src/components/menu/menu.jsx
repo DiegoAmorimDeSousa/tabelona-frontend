@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './menu.css';
 
@@ -10,7 +11,7 @@ function Menu(){
                 Home
             </div>
             <div>
-                Pontos corridos
+                <Link to='/classification'>Pontos corridos</Link>
             </div>
             <div>
                 Mata - Mata

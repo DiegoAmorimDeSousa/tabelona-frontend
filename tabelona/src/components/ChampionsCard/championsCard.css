@@ -8,6 +8,8 @@
 
 .champions-card {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .title, .time {
@@ -64,12 +66,17 @@
 .time-torney img {
     width: 25px;
     margin: 0 10px;
+    max-height: 29px;
 }
 
 .first {
-    background: rgb(30, 88, 30)
+    background: #2E8B57;
 }
 
 .second {
     background: rgb(197, 197, 15);
+}
+
+.marginBottom {
+    margin: 0 0 20px;
 }

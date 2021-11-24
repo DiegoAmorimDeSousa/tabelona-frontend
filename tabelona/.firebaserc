@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "homologacao": "frontends-shared"  
+  },
+  "targets": {
+    "frontends-shared": {
+      "hosting": {
+        "homologacao": [
+          "frontends-shared"
+        ]
+      }
+    }
+  }
+}

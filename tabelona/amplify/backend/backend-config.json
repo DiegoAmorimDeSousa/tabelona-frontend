@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"code7accountsf741e6c9": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}
