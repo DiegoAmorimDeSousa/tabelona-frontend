@@ -6,6 +6,7 @@ import './classification.css';
 import CreateTime from '../../components/CreateTime/createTime';
 
 import { getTimes } from '../../store/GetTimes/GetTimesAction';
+import { updatePontuationTime } from '../../store/UpdatePontuation/UpdatePontuationAction';
 
 function Classification() {
 
@@ -13,62 +14,92 @@ function Classification() {
 
     const times = useSelector(state => state.times);
 
-    const [arrayTimes, setArrayTimes] = useState([]);
+    const timesUpdate = useSelector(state => state.updatePontuationTime);
+
+    const [updatePontuation, setUpdatePontuationTime] = useState(false);
+    const [timesArray, setTimesArray] = useState([]);
 
     useEffect(() => {
 
-        dispatch(getTimes());
 
-        if(times.times !== undefined) {
+        if(updatePontuation){
 
-            console.log(times.times.sort(function (a, b) {
+            // setTimesArray(times.times)
 
-                if(a.classification.pontuation !== undefined && b.classification.pontuation !== undefined) {
-                    if(a.classification.pontuation > b.classification.pontuation){
-                        return 1;
-                    } else {
-                        return -1
-                    }   
-                }           
-            }));
+            // dispatch(updatePontuationTime('name', 'result'));
 
-            // setArrayTimes(times.times.sort(function (a, b) {
-	
-            //     return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);
-             
-            // }));
+            // if(timesUpdate.times !== undefined){
+            //     setTimesArray(timesUpdate.times)
+            // }
+
+            // console.log('É', timesUpdate.times);
+
+            // dispatch(getTimes());
+
+            // if(times.times !== undefined) {
+            //     setTimesArray(times.times)
+            // }
+
+        } 
+
+        if(updatePontuation === false){
+            if(times.times !== undefined) {
+                setTimesArray(times.times)
+            }
         }
  
-    }, [times.success, arrayTimes, dispatch])
+    }, [times.success, timesArray, updatePontuation, dispatch])
 
     let positionBrasilA = 0;
     let positionBrasilB = 0;
     let positionMundoA = 0;
     let positionMundoB = 0;
-    let positionMundoC = 0;
 
-    const styleBackGround = (position) => {
+    const styleBackGround = (position, serie) => {
+
+        if(position === 'header'){
+            return '5px #5F9EA0 solid';
+        }
 
         if(position === 1){
-            return '#2E8B57';
+            return '5px #2E8B57 solid';
         }
 
         if(position < 7){
-            return '#1E90FF';
+            return '5px #1E90FF solid';
         }
 
-        if(position < 14){
-            return '#DEB887';
+        if(position < 14 && serie === 'A'){
+            return '5px #DEB887 solid';
         }
 
-        if(position < 25){
-            return '#B8860B';
+        if(position < 25 && serie === 'A'){
+            return '5px #B8860B solid';
+        }
+
+        if(position < 25 && serie === 'B'){
+            return '5px #B8860B solid';
         }
 
         if(position > 24){
-         return 'red';   
+         return '5px red solid';   
         }
 
+    }
+
+    const classificationTime = (name, result) => {
+
+        if(document.getElementById(name + result).checked){
+
+            dispatch(updatePontuationTime(name, result));
+
+            // setUpdatePontuationTime(true);
+            
+            setTimeout(() => {
+                console.log('chamaa', timesUpdate);
+                document.getElementById(name + result).checked = false;
+            }, 3000);
+        };
     }
 
     return (
@@ -81,7 +112,9 @@ function Classification() {
                 {/* SÉRIE A - BRASIL */}
                 <div className="marginBottom">
                     <div className="title">
-                        <div className="champions-card-title pos">
+                        <div 
+                        style={{borderRight: styleBackGround('header')}}
+                        className="champions-card-title pos">
                             POS
                         </div>
                         <div className="champions-card-title name-torney">
@@ -90,76 +123,86 @@ function Classification() {
                         <div className="champions-card-title quantity">
                             P
                         </div>
-                        <div className="champions-card-title quantity">
-                            J
-                        </div>
-                        <div className="champions-card-title quantity">
-                            V
+                        <div className="champions-card-title quantity" style={{width: '87px'}}>
+                            R
                         </div>
                     </div>
                     {
-                    times.times !== undefined ?  times.times.map(element => {
+                    timesArray.map(element => {
                         if(element.seriesType === 'A' && element.country === 'Brasil'){
                             positionBrasilA = positionBrasilA + 1;
                                 return (
                                     <>
                                          <div className="time">
                                             <div 
-                                            style={{ backgroundColor: styleBackGround(positionBrasilA)}} 
+                                            style={{borderRight: styleBackGround(positionBrasilA, 'A')}}
                                             className="champions-card-time pos first">
-                                                {positionBrasilA}º
+                                                {positionBrasilA}
                                             </div>
-                                            <div
-                                            style={{ backgroundColor: styleBackGround(positionBrasilA)}}
-                                            className="champions-card-time name-torney time-torney first">
+                                            <div className="champions-card-time name-torney time-torney first">
                                                 <img src={element.logo} />
                                                 {element.name !== undefined ? element.name.length > 15 ? element.surname : element.name : ''}
                                             </div>
-                                            <div 
-                                            style={{ backgroundColor: styleBackGround(positionBrasilA)}}
-                                            className="champions-card-time quantity first">
-                                                {element.classification.pontuation}
+                                            <div className="champions-card-time quantity first">
+                                                {element.classification[0].pontuation}
                                             </div>
-                                            <div 
-                                            style={{ backgroundColor: styleBackGround(positionBrasilA)}}
-                                            className="champions-card-time quantity first">
-                                                {element.classification.games}
-                                            </div>
-                                            <div 
-                                            style={{ backgroundColor: styleBackGround(positionBrasilA)}}
-                                            className="champions-card-time quantity first">
-                                                {element.classification.wins}
+                                            <div className="champions-card-time quantity first">
+                                                <div className="column-result">
+                                                    <label>V</label>
+                                                    <input id={element.name + 'V'} type="checkbox" 
+                                                    onClick={() => {classificationTime(element.name, 'V')}}
+                                                    />
+                                                </div>
+                                                <div className="column-result">
+                                                    <label>E</label>
+                                                    <input id={element.name + 'E'} type="checkbox"
+                                                    onClick={() => {classificationTime(element.name, 'E')}}
+                                                    />
+                                                </div>
+                                                <div className="column-result">
+                                                    <label>D</label>
+                                                    <input id={element.name + 'D'} type="checkbox"
+                                                    onClick={() => {classificationTime(element.name, 'D')}}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </>
                                 )
                         }
-                    }) : ''
+                    })
                     }
                 </div>
 
                 {/* SÉRIE B - BRASIL */}
                 <div className="marginBottom">
                     <div className="title">
-                        <div className="champions-card-title pos">
+                        <div 
+                        style={{borderRight: styleBackGround('header')}}
+                        className="champions-card-title pos">
                             POS
                         </div>
                         <div className="champions-card-title name-torney">
                             SÉRIE B - BRASIL
                         </div>
                         <div className="champions-card-title quantity">
-                            ANO
+                            P
+                        </div>
+                        <div className="champions-card-title quantity" style={{width: '87px'}}>
+                            R
                         </div>
                     </div>
                     {
-                    times.times !== undefined ?  times.times.map(element => {
+                    timesArray.map(element => {
                         if(element.seriesType === 'B' && element.country === 'Brasil'){
                             positionBrasilB = positionBrasilB + 1;
                                 return (
                                     <>
                                          <div className="time">
-                                            <div className="champions-card-time pos first">
-                                                {positionBrasilB}º
+                                            <div 
+                                            style={{borderRight: styleBackGround(positionBrasilB, 'B')}}
+                                            className="champions-card-time pos first">
+                                                {positionBrasilB}
                                             </div>
                                             <div className="champions-card-time name-torney time-torney first">
                                                 <img src={element.logo} />
@@ -168,36 +211,57 @@ function Classification() {
                                             <div className="champions-card-time quantity first">
                                                 {element.classification[0].pontuation}
                                             </div>
+                                            <div className="champions-card-time quantity first">
+                                                <div className="column-result">
+                                                    <label>V</label>
+                                                    <input type="checkbox"/>
+                                                </div>
+                                                <div className="column-result">
+                                                    <label>E</label>
+                                                    <input type="checkbox"/>
+                                                </div>
+                                                <div className="column-result">
+                                                    <label>D</label>
+                                                    <input type="checkbox"/>
+                                                </div>
+                                            </div>
                                         </div>
                                     </>
                                 )
                         }
-                    }) : ''
+                    })
                     }
                 </div>
 
                 {/* SÉRIE A - MUNDO */}
                 <div className="marginBottom">
                     <div className="title">
-                        <div className="champions-card-title pos">
+                        <div 
+                         style={{borderRight: styleBackGround('header', 'A')}}
+                        className="champions-card-title pos">
                             POS
                         </div>
                         <div className="champions-card-title name-torney">
                             SÉRIE A - MUNDO
                         </div>
                         <div className="champions-card-title quantity">
-                            ANO
+                            P
+                        </div>
+                        <div className="champions-card-title quantity" style={{width: '87px'}}>
+                            R
                         </div>
                     </div>
                     {
-                    times.times !== undefined ?  times.times.map(element => {
+                    timesArray.map(element => {
                         if(element.seriesType === 'A' && element.country === 'World'){
                             positionMundoA = positionMundoA + 1;
                                 return (
                                     <>
                                          <div className="time">
-                                            <div className="champions-card-time pos first">
-                                                {positionMundoA}º
+                                            <div 
+                                            style={{borderRight: styleBackGround(positionMundoA, 'A')}}
+                                            className="champions-card-time pos first">
+                                                {positionMundoA}
                                             </div>
                                             <div className="champions-card-time name-torney time-torney first">
                                                 <img src={element.logo} />
@@ -206,36 +270,57 @@ function Classification() {
                                             <div className="champions-card-time quantity first">
                                                 {element.classification[0].pontuation}
                                             </div>
+                                            <div className="champions-card-time quantity first">
+                                                <div className="column-result">
+                                                    <label>V</label>
+                                                    <input type="checkbox"/>
+                                                </div>
+                                                <div className="column-result">
+                                                    <label>E</label>
+                                                    <input type="checkbox"/>
+                                                </div>
+                                                <div className="column-result">
+                                                    <label>D</label>
+                                                    <input type="checkbox"/>
+                                                </div>
+                                            </div>
                                         </div>
                                     </>
                                 )
                         }
-                    }) : ''
+                    })
                     }
                 </div>
                 
                 {/* SÉRIE B - MUNDO */}
                 <div className="marginBottom">
                     <div className="title">
-                        <div className="champions-card-title pos">
+                        <div 
+                        style={{borderRight: styleBackGround('header', 'A')}}
+                        className="champions-card-title pos">
                             POS
                         </div>
                         <div className="champions-card-title name-torney">
                             SÉRIE B - MUNDO
                         </div>
                         <div className="champions-card-title quantity">
-                            ANO
+                            P
+                        </div>
+                        <div className="champions-card-title quantity" style={{width: '87px'}}>
+                            R
                         </div>
                     </div>
                     {
-                    times.times !== undefined ?  times.times.map(element => {
+                    timesArray.map(element => {
                         if(element.seriesType === 'B' && element.country === 'World'){
                             positionMundoB = positionMundoB + 1;
                                 return (
                                     <>
                                          <div className="time">
-                                            <div className="champions-card-time pos first">
-                                                {positionMundoB}º
+                                            <div 
+                                            style={{borderRight: styleBackGround(positionMundoB, 'B')}}
+                                            className="champions-card-time pos first">
+                                                {positionMundoB}
                                             </div>
                                             <div className="champions-card-time name-torney time-torney first">
                                                 <img src={element.logo} />
@@ -244,49 +329,25 @@ function Classification() {
                                             <div className="champions-card-time quantity first">
                                                 {element.classification[0].pontuation}
                                             </div>
-                                        </div>
-                                    </>
-                                )
-                        }
-                    }) : ''
-                    }
-                </div>
-
-                {/* SÉRIE C - MUNDO */}
-                <div className="marginBottom">
-                    <div className="title">
-                        <div className="champions-card-title pos">
-                            POS
-                        </div>
-                        <div className="champions-card-title name-torney">
-                            SÉRIE C - MUNDO
-                        </div>
-                        <div className="champions-card-title quantity">
-                            ANO
-                        </div>
-                    </div>
-                    {
-                    times.times !== undefined ?  times.times.map(element => {
-                        if(element.seriesType === 'C' && element.country === 'World'){
-                            positionMundoC = positionMundoC + 1;
-                                return (
-                                    <>
-                                         <div className="time">
-                                            <div className="champions-card-time pos first">
-                                                {positionMundoC}º
-                                            </div>
-                                            <div className="champions-card-time name-torney time-torney first">
-                                                <img src={element.logo} />
-                                                {element.name.length > 15 ? element.surname : element.name}
-                                            </div>
                                             <div className="champions-card-time quantity first">
-                                                {element.classification[0].pontuation}
+                                                <div className="column-result">
+                                                    <label>V</label>
+                                                    <input type="checkbox"/>
+                                                </div>
+                                                <div className="column-result">
+                                                    <label>E</label>
+                                                    <input type="checkbox"/>
+                                                </div>
+                                                <div className="column-result">
+                                                    <label>D</label>
+                                                    <input type="checkbox"/>
+                                                </div>
                                             </div>
                                         </div>
                                     </>
                                 )
                         }
-                    }) : ''
+                    })
                     }
                 </div>
             </div>

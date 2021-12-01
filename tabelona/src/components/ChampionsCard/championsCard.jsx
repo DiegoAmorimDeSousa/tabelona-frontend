@@ -186,44 +186,6 @@ function ChampionsCard() {
                     }) : ''}
                 </div>
 
-                {/* SÉRIE C - MUNDO */}
-                <div className="marginBottom">
-                    <div className="title">
-                        <div className="champions-card-title pos">
-                            POS
-                        </div>
-                        <div className="champions-card-title name-torney">
-                            SÉRIE C - MUNDO
-                        </div>
-                        <div className="champions-card-title quantity">
-                            ANO
-                        </div>
-                    </div>
-                    {times.times !== undefined ? times.times.map(element => {
-                        return element.titles.map(title => {
-                            if(title.name === 'Série C - Mundo'){
-                                positionMundoC = positionMundoC + 1;
-                                return (
-                                    <>
-                                         <div className="time">
-                                            <div className="champions-card-time pos first">
-                                                {positionMundoC}º
-                                            </div>
-                                            <div className="champions-card-time name-torney time-torney first">
-                                                <img src={element.logo} />
-                                                {element.name.length > 15 ? element.surname : element.name}
-                                            </div>
-                                            <div className="champions-card-time quantity first">
-                                                {title.year}
-                                            </div>
-                                        </div>
-                                    </>
-                                )
-                            }
-                        })
-                    }) : ''}
-                </div>
-
                 {/* CHAMPIONS LEAGUE */}
                 <div className="marginBottom">
                     <div className="title">
