@@ -1,6 +1,4 @@
-export default function (state = 0, action) {
-
-    console.log(action.payload);
+export default function (state = [], action) {
 
     switch (action.type) {
         case 'UPDATE_PONTUATION_TIME':

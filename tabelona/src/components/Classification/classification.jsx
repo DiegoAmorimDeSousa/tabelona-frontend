@@ -18,27 +18,35 @@ function Classification() {
 
     const [updatePontuation, setUpdatePontuationTime] = useState(false);
     const [timesArray, setTimesArray] = useState([]);
+    const [name, setName] = useState('');
+    const [result, setResult] = useState('');
+    const [pontuation, setPontuation] = useState('');
+    const [games, setGames] = useState('');
 
     useEffect(() => {
 
+        dispatch(getTimes());
 
         if(updatePontuation){
 
-            // setTimesArray(times.times)
+            dispatch(updatePontuationTime(name, result, pontuation, games));
 
-            // dispatch(updatePontuationTime('name', 'result'));
+            if(timesUpdate.times !== undefined){
 
-            // if(timesUpdate.times !== undefined){
-            //     setTimesArray(timesUpdate.times)
-            // }
+                dispatch(updatePontuationTime('name', 'result', 'pontuation', 'games'));
 
-            // console.log('É', timesUpdate.times);
+                setTimesArray(timesUpdate.times);
 
-            // dispatch(getTimes());
+                setTimeout(() => {
+                    document.getElementById(name + result).checked = false;
+                    setUpdatePontuationTime(false);
+                    setName('');
+                    setResult('');
+                    setPontuation('');
+                    setGames('');
+                }, 2000);
 
-            // if(times.times !== undefined) {
-            //     setTimesArray(times.times)
-            // }
+            }
 
         } 
 
@@ -48,7 +56,7 @@ function Classification() {
             }
         }
  
-    }, [times.success, timesArray, updatePontuation, dispatch])
+    }, [times.success, timesArray, timesUpdate.success, updatePontuation, dispatch])
 
     let positionBrasilA = 0;
     let positionBrasilB = 0;
@@ -87,18 +95,16 @@ function Classification() {
 
     }
 
-    const classificationTime = (name, result) => {
+    const classificationTime = (name, result, pontuation, games) => {
 
         if(document.getElementById(name + result).checked){
 
-            dispatch(updatePontuationTime(name, result));
-
-            // setUpdatePontuationTime(true);
+            setUpdatePontuationTime(true);
+            setName(name);
+            setResult(result);
+            setPontuation(pontuation);
+            setGames(games);
             
-            setTimeout(() => {
-                console.log('chamaa', timesUpdate);
-                document.getElementById(name + result).checked = false;
-            }, 3000);
         };
     }
 
@@ -150,19 +156,19 @@ function Classification() {
                                                 <div className="column-result">
                                                     <label>V</label>
                                                     <input id={element.name + 'V'} type="checkbox" 
-                                                    onClick={() => {classificationTime(element.name, 'V')}}
+                                                    onClick={() => {classificationTime(element.name, 'V', element.classification[0].pontuation, element.classification[0].games)}}
                                                     />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>E</label>
                                                     <input id={element.name + 'E'} type="checkbox"
-                                                    onClick={() => {classificationTime(element.name, 'E')}}
+                                                    onClick={() => {classificationTime(element.name, 'E', element.classification[0].pontuation, element.classification[0].games)}}
                                                     />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>D</label>
                                                     <input id={element.name + 'D'} type="checkbox"
-                                                    onClick={() => {classificationTime(element.name, 'D')}}
+                                                    onClick={() => {classificationTime(element.name, 'D', element.classification[0].pontuation, element.classification[0].games)}}
                                                     />
                                                 </div>
                                             </div>
@@ -214,15 +220,21 @@ function Classification() {
                                             <div className="champions-card-time quantity first">
                                                 <div className="column-result">
                                                     <label>V</label>
-                                                    <input type="checkbox"/>
+                                                    <input id={element.name + 'V'} type="checkbox" 
+                                                    onClick={() => {classificationTime(element.name, 'V', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>E</label>
-                                                    <input type="checkbox"/>
+                                                    <input id={element.name + 'E'} type="checkbox"
+                                                    onClick={() => {classificationTime(element.name, 'E', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>D</label>
-                                                    <input type="checkbox"/>
+                                                    <input id={element.name + 'D'} type="checkbox"
+                                                    onClick={() => {classificationTime(element.name, 'D', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -273,15 +285,21 @@ function Classification() {
                                             <div className="champions-card-time quantity first">
                                                 <div className="column-result">
                                                     <label>V</label>
-                                                    <input type="checkbox"/>
+                                                    <input id={element.name + 'V'} type="checkbox" 
+                                                    onClick={() => {classificationTime(element.name, 'V', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>E</label>
-                                                    <input type="checkbox"/>
+                                                    <input id={element.name + 'E'} type="checkbox"
+                                                    onClick={() => {classificationTime(element.name, 'E', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>D</label>
-                                                    <input type="checkbox"/>
+                                                    <input id={element.name + 'D'} type="checkbox"
+                                                    onClick={() => {classificationTime(element.name, 'D', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -332,15 +350,21 @@ function Classification() {
                                             <div className="champions-card-time quantity first">
                                                 <div className="column-result">
                                                     <label>V</label>
-                                                    <input type="checkbox"/>
+                                                    <input id={element.name + 'V'} type="checkbox" 
+                                                    onClick={() => {classificationTime(element.name, 'V', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>E</label>
-                                                    <input type="checkbox"/>
+                                                    <input id={element.name + 'E'} type="checkbox"
+                                                    onClick={() => {classificationTime(element.name, 'E', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>D</label>
-                                                    <input type="checkbox"/>
+                                                    <input id={element.name + 'D'} type="checkbox"
+                                                    onClick={() => {classificationTime(element.name, 'D', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
