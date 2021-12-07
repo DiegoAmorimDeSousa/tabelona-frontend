@@ -4,21 +4,31 @@ import './home.css';
 
 import ChampionsCard from '../../components/ChampionsCard/championsCard';
 import ClassificationCard from '../../components/Classification/classification';
+import SwitchesCard from '../../components/Switches/switches';
 
 function Home(){
 
     const [Champions, setChampions] = useState(false);
     const [Classification, setClassification] = useState(true);
+    const [Switches, setSwitches] = useState(false);
 
-    const onModal = () => {
-        if(Champions === false){
+    const onModal = (page) => {
+        if(page === 'Champions'){
             setChampions(true);
             setClassification(false);
+            setSwitches(false);
         } 
 
-        if(Classification === false){
+        if(page === 'Classification'){
             setClassification(true);
             setChampions(false);
+            setSwitches(false);
+        }
+
+        if(page === 'Switches'){
+            setClassification(false);
+            setChampions(false);
+            setSwitches(true);
         }
     }
     
@@ -30,13 +40,13 @@ function Home(){
                     <div>
                         <h2>Bem vindo á Tabelona</h2>
                         <div className="menu">
-                            <div onClick={onModal}>
+                            <div onClick={() => {onModal('Champions')}}>
                                 Home
                             </div>
-                            <div onClick={onModal}>
+                            <div onClick={() => {onModal('Classification')}}>
                                 Pontos corridos
                             </div>
-                            <div>
+                            <div onClick={() => {onModal('Switches')}}>
                                 Mata - Mata
                             </div>
                         </div>
@@ -59,6 +69,12 @@ function Home(){
                 {
                     Classification === true ? 
                     <ClassificationCard />
+                    :
+                    ''
+                }
+                {
+                    Switches === true ? 
+                    <SwitchesCard />
                     :
                     ''
                 }
