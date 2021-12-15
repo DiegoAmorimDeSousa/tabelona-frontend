@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './classification.css';
 
+import ArrowDown from '../../assets/down.png';
+import ArrowUp from '../../assets/up.png';
+import Circle from '../../assets/circle.png';
+
 import CreateTime from '../../components/CreateTime/createTime';
 
 import { getTimes } from '../../store/GetTimes/GetTimesAction';
@@ -108,10 +112,25 @@ function Classification() {
         };
     }
 
+    const ArrowOrCicle = (lastPosition, position) => {
+        if(Number(lastPosition) < position){
+            return ArrowDown;
+        }
+
+        if(Number(lastPosition) > position){
+            return ArrowUp;
+        }
+
+        if(Number(lastPosition) === position){
+            return Circle;
+        }
+    }
+
     return (
 
         <>
-        <CreateTime />
+        <CreateTime
+        times = {timesArray} />
         <div className="champions-card-box">
             <div className="champions-card">
 
@@ -147,7 +166,7 @@ function Classification() {
                                             </div>
                                             <div className="champions-card-time name-torney time-torney first">
                                                 <img src={element.logo} />
-                                                {element.name !== undefined ? element.name.length > 15 ? element.surname : element.name : ''}
+                                                {element.name !== undefined ? element.name.length > 15 ? element.surname : element.name : ''}    
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 {element.classification[0].pontuation}
@@ -212,7 +231,7 @@ function Classification() {
                                             </div>
                                             <div className="champions-card-time name-torney time-torney first">
                                                 <img src={element.logo} />
-                                                {element.name.length > 15 ? element.surname : element.name}
+                                                {element.name !== undefined ? element.name.length > 15 ? element.surname : element.name : ''}    
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 {element.classification[0].pontuation}
@@ -277,7 +296,7 @@ function Classification() {
                                             </div>
                                             <div className="champions-card-time name-torney time-torney first">
                                                 <img src={element.logo} />
-                                                {element.name.length > 15 ? element.surname : element.name}
+                                                {element.name !== undefined ? element.name.length > 15 ? element.surname : element.name : ''}    
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 {element.classification[0].pontuation}
@@ -342,7 +361,7 @@ function Classification() {
                                             </div>
                                             <div className="champions-card-time name-torney time-torney first">
                                                 <img src={element.logo} />
-                                                {element.name.length > 15 ? element.surname : element.name}
+                                                {element.name !== undefined ? element.name.length > 15 ? element.surname : element.name : ''}    
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 {element.classification[0].pontuation}

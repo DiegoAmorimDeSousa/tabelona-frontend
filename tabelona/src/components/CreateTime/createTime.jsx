@@ -5,7 +5,7 @@ import './createTime.css';
 
 import { createTime } from '../../store/CreateTime/CreateTimeAction';
 
-function CreateTime() {
+function CreateTime(props) {
 
     const dispatch = useDispatch();
 
@@ -59,9 +59,18 @@ function CreateTime() {
         window.location.href = '/'
     }
 
+    const refreshClassification = () => {
+        const { times } = props;
+
+        console.log(times);
+    }
+
     return (
         <>
             <div className="create-time-box">
+                <div className="create-time-button" onClick={refreshClassification}>
+                    Zerar
+                </div>
                 <div className="create-time-button" onClick={onModal}>
                     Cadastrar time +
                 </div>

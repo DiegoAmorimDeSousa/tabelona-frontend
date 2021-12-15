@@ -22,7 +22,7 @@ function Switches(){
         if(times.times !== undefined){
             times.times.map(times => {
 
-                console.log(Math.random());
+                // console.log('EI', (Math.random() * 10).toString().split('.')[0]);
 
                 times.switching.map(switches => {
                     if(switches.name === torney){
@@ -32,7 +32,7 @@ function Switches(){
             })
         }
 
-        console.log(arrayInitial);
+        // console.log(arrayInitial);
  
     }, [times.success, dispatch])
 
