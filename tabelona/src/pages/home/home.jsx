@@ -9,8 +9,8 @@ import SwitchesCard from '../../components/Switches/switches';
 function Home(){
 
     const [Champions, setChampions] = useState(false);
-    const [Classification, setClassification] = useState(false);
-    const [Switches, setSwitches] = useState(true);
+    const [Classification, setClassification] = useState(true);
+    const [Switches, setSwitches] = useState(false);
 
     const onModal = (page) => {
         if(page === 'Champions'){

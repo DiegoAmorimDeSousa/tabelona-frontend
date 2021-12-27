@@ -88,3 +88,9 @@
     font-size: 15px;
     margin-right: 3px;
 }
+
+.last-update {
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 10px 0;
+}

@@ -3,10 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './classification.css';
 
-import ArrowDown from '../../assets/down.png';
-import ArrowUp from '../../assets/up.png';
-import Circle from '../../assets/circle.png';
-
 import CreateTime from '../../components/CreateTime/createTime';
 
 import { getTimes } from '../../store/GetTimes/GetTimesAction';
@@ -26,6 +22,7 @@ function Classification() {
     const [result, setResult] = useState('');
     const [pontuation, setPontuation] = useState('');
     const [games, setGames] = useState('');
+    const [lastUpdate, setLastUpdate] = useState('');
 
     useEffect(() => {
 
@@ -56,7 +53,25 @@ function Classification() {
 
         if(updatePontuation === false){
             if(times.times !== undefined) {
-                setTimesArray(times.times)
+                setTimesArray(times.times);
+
+                const dateArray = [];
+
+                times.times.map(element => {
+
+                    dateArray.push(element.updatedAt);
+
+                });
+
+                const dateArraySort = dateArray.sort();
+
+                const dateArraySortLength = dateArraySort.length;
+
+                const splitDateArray = dateArraySort[dateArraySortLength - 1].split('T')[0].split('-');
+
+                const lastUpdateString = splitDateArray[2] + '/' + splitDateArray[1] + '/' + splitDateArray[0];
+
+                setLastUpdate(lastUpdateString);
             }
         }
  
@@ -101,29 +116,15 @@ function Classification() {
 
     const classificationTime = (name, result, pontuation, games) => {
 
-        if(document.getElementById(name + result).checked){
+        // if(document.getElementById(name + result).checked){
 
-            setUpdatePontuationTime(true);
-            setName(name);
-            setResult(result);
-            setPontuation(pontuation);
-            setGames(games);
+        //     setUpdatePontuationTime(true);
+        //     setName(name);
+        //     setResult(result);
+        //     setPontuation(pontuation);
+        //     setGames(games);
             
-        };
-    }
-
-    const ArrowOrCicle = (lastPosition, position) => {
-        if(Number(lastPosition) < position){
-            return ArrowDown;
-        }
-
-        if(Number(lastPosition) > position){
-            return ArrowUp;
-        }
-
-        if(Number(lastPosition) === position){
-            return Circle;
-        }
+        // };
     }
 
     return (
@@ -132,6 +133,7 @@ function Classification() {
         <CreateTime
         times = {timesArray} />
         <div className="champions-card-box">
+            <div className="last-update">Último Update: {lastUpdate}</div>
             <div className="champions-card">
 
                 {/* SÉRIE A - BRASIL */}
