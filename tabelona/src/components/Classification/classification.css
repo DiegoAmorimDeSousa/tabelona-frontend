@@ -94,3 +94,10 @@
     font-family: 'Courier New', Courier, monospace;
     margin: 10px 0;
 }
+
+.select-year {
+    margin: 0 20px 0 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+}

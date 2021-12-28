@@ -22,11 +22,20 @@ function Classification() {
     const [result, setResult] = useState('');
     const [pontuation, setPontuation] = useState('');
     const [games, setGames] = useState('');
-    const [lastUpdate, setLastUpdate] = useState('');
+    const [lastUpdate, setLastUpdate] = useState('Procurando data');
+    const [arrayYearTorney, setArrayYearTorney] = useState([]);
+    const [valueSelect, setValueSelect] = useState('');
+    const [valueSelectBoolean, setValueSelectBoolean] = useState(true);
 
     useEffect(() => {
 
-        dispatch(getTimes());
+        const dateYear = new Date().getFullYear();
+
+        setValueSelect(dateYear);
+
+        if(valueSelectBoolean){
+            dispatch(getTimes(dateYear));
+        } 
 
         if(updatePontuation){
 
@@ -56,12 +65,23 @@ function Classification() {
                 setTimesArray(times.times);
 
                 const dateArray = [];
+                const yearTorney = [];
+
+                yearTorney.push(dateYear.toString());
 
                 times.times.map(element => {
+
+                    element.classification.map(year => {
+                        yearTorney.push(year.year.toString());
+                    });
 
                     dateArray.push(element.updatedAt);
 
                 });
+
+                setArrayYearTorney(yearTorney.filter(function(este, i) {
+                    return yearTorney.indexOf(este) === i;
+                }));
 
                 const dateArraySort = dateArray.sort();
 
@@ -69,13 +89,15 @@ function Classification() {
 
                 const splitDateArray = dateArraySort[dateArraySortLength - 1].split('T')[0].split('-');
 
-                const lastUpdateString = splitDateArray[2] + '/' + splitDateArray[1] + '/' + splitDateArray[0];
+                const hourDateArray = dateArraySort[dateArraySortLength - 1].split('T')[1].split(':');
+
+                const lastUpdateString = splitDateArray[2] + '/' + splitDateArray[1] + '/' + splitDateArray[0] + ' ' + (Number(hourDateArray[0]) - 3) + ':' + hourDateArray[1];
 
                 setLastUpdate(lastUpdateString);
             }
         }
  
-    }, [times.success, timesArray, timesUpdate.success, updatePontuation, dispatch])
+    }, [times.success, timesArray, timesUpdate.success, updatePontuation, valueSelect, valueSelectBoolean, dispatch])
 
     let positionBrasilA = 0;
     let positionBrasilB = 0;
@@ -116,16 +138,34 @@ function Classification() {
 
     const classificationTime = (name, result, pontuation, games) => {
 
-        // if(document.getElementById(name + result).checked){
+        if(document.getElementById(name + result).checked){
 
-        //     setUpdatePontuationTime(true);
-        //     setName(name);
-        //     setResult(result);
-        //     setPontuation(pontuation);
-        //     setGames(games);
+            setUpdatePontuationTime(true);
+            setName(name);
+            setResult(result);
+            setPontuation(pontuation);
+            setGames(games);
             
-        // };
+        };
     }
+
+    const onChangeSelect = () => {
+        const selectTag = document.getElementById('select-year');
+
+        const textSelect = selectTag.options[selectTag.selectedIndex].text;
+
+       if(valueSelect.toString() !== textSelect){
+
+            dispatch(getTimes(textSelect));
+
+            setTimesArray(times.times);
+
+            console.log(timesArray);
+
+            setValueSelect(textSelect);
+            setValueSelectBoolean(false);
+       }
+    } 
 
     return (
 
@@ -133,7 +173,17 @@ function Classification() {
         <CreateTime
         times = {timesArray} />
         <div className="champions-card-box">
-            <div className="last-update">Último Update: {lastUpdate}</div>
+            <div className="last-update">
+                Ano: 
+                <select className="select-year" id="select-year" onClick={onChangeSelect}>
+                    {arrayYearTorney.map(element => {
+                       return (
+                        <option value={element}>{element}</option>
+                       )
+                    })}
+                </select>
+                Último Update: {lastUpdate}
+            </div>
             <div className="champions-card">
 
                 {/* SÉRIE A - BRASIL */}
