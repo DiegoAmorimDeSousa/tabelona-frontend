@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import './createTime.css';
 
 import { createTime } from '../../store/CreateTime/CreateTimeAction';
+import { refreshClassificationAction } from '../../store/RefreshClassification/RefreshClassificationAction';
 
 function CreateTime(props) {
 
@@ -62,7 +63,7 @@ function CreateTime(props) {
     const refreshClassification = () => {
         const { times } = props;
 
-        console.log(times);
+        dispatch(refreshClassificationAction(times));
     }
 
     return (

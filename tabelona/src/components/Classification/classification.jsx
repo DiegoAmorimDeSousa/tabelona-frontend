@@ -118,7 +118,7 @@ function Classification() {
             return '5px #1E90FF solid';
         }
 
-        if(position < 14 && serie === 'A'){
+        if(position < 15 && serie === 'A'){
             return '5px #DEB887 solid';
         }
 
@@ -154,17 +154,15 @@ function Classification() {
 
         const textSelect = selectTag.options[selectTag.selectedIndex].text;
 
-       if(valueSelect.toString() !== textSelect){
+        if(valueSelect.toString() !== textSelect){
 
-            dispatch(getTimes(textSelect));
+                dispatch(getTimes(textSelect));
 
-            setTimesArray(times.times);
+                setTimesArray(times.times);
 
-            console.log(timesArray);
-
-            setValueSelect(textSelect);
-            setValueSelectBoolean(false);
-       }
+                setValueSelect(textSelect);
+                setValueSelectBoolean(false);
+        }
     } 
 
     return (
@@ -175,7 +173,7 @@ function Classification() {
         <div className="champions-card-box">
             <div className="last-update">
                 Ano: 
-                <select className="select-year" id="select-year" onClick={onChangeSelect}>
+                <select className="select-year" id="select-year" onChange={onChangeSelect}>
                     {arrayYearTorney.map(element => {
                        return (
                         <option value={element}>{element}</option>
@@ -221,25 +219,54 @@ function Classification() {
                                                 {element.name !== undefined ? element.name.length > 15 ? element.surname : element.name : ''}    
                                             </div>
                                             <div className="champions-card-time quantity first">
-                                                {element.classification[0].pontuation}
+                                                {element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        console.log('ENTROU AQUI', yearClassification.year);
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                })}
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 <div className="column-result">
                                                     <label>V</label>
                                                     <input id={element.name + 'V'} type="checkbox" 
-                                                    onClick={() => {classificationTime(element.name, 'V', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'V', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>E</label>
                                                     <input id={element.name + 'E'} type="checkbox"
-                                                    onClick={() => {classificationTime(element.name, 'E', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'E', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>D</label>
                                                     <input id={element.name + 'D'} type="checkbox"
-                                                    onClick={() => {classificationTime(element.name, 'D', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'D', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                             </div>
@@ -286,25 +313,53 @@ function Classification() {
                                                 {element.name !== undefined ? element.name.length > 15 ? element.surname : element.name : ''}    
                                             </div>
                                             <div className="champions-card-time quantity first">
-                                                {element.classification[0].pontuation}
+                                                {element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                })}
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 <div className="column-result">
                                                     <label>V</label>
                                                     <input id={element.name + 'V'} type="checkbox" 
-                                                    onClick={() => {classificationTime(element.name, 'V', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'V', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>E</label>
                                                     <input id={element.name + 'E'} type="checkbox"
-                                                    onClick={() => {classificationTime(element.name, 'E', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'E', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>D</label>
                                                     <input id={element.name + 'D'} type="checkbox"
-                                                    onClick={() => {classificationTime(element.name, 'D', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'D', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                             </div>
@@ -351,25 +406,53 @@ function Classification() {
                                                 {element.name !== undefined ? element.name.length > 15 ? element.surname : element.name : ''}    
                                             </div>
                                             <div className="champions-card-time quantity first">
-                                                {element.classification[0].pontuation}
+                                                {element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                })}
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 <div className="column-result">
                                                     <label>V</label>
                                                     <input id={element.name + 'V'} type="checkbox" 
-                                                    onClick={() => {classificationTime(element.name, 'V', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'V', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>E</label>
                                                     <input id={element.name + 'E'} type="checkbox"
-                                                    onClick={() => {classificationTime(element.name, 'E', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'E', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>D</label>
                                                     <input id={element.name + 'D'} type="checkbox"
-                                                    onClick={() => {classificationTime(element.name, 'D', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'D', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                             </div>
@@ -416,25 +499,53 @@ function Classification() {
                                                 {element.name !== undefined ? element.name.length > 15 ? element.surname : element.name : ''}    
                                             </div>
                                             <div className="champions-card-time quantity first">
-                                                {element.classification[0].pontuation}
+                                                {element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                })}
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 <div className="column-result">
                                                     <label>V</label>
                                                     <input id={element.name + 'V'} type="checkbox" 
-                                                    onClick={() => {classificationTime(element.name, 'V', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'V', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>E</label>
                                                     <input id={element.name + 'E'} type="checkbox"
-                                                    onClick={() => {classificationTime(element.name, 'E', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'E', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                                 <div className="column-result">
                                                     <label>D</label>
                                                     <input id={element.name + 'D'} type="checkbox"
-                                                    onClick={() => {classificationTime(element.name, 'D', element.classification[0].pontuation, element.classification[0].games)}}
+                                                    onClick={() => {classificationTime(element.name, 'D', element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.pontuation;
+                                                    };
+                                                }), element.classification.map(yearClassification => {
+                                                    if(valueSelect === yearClassification.year){
+                                                        return yearClassification.games;
+                                                    };
+                                                }))}}
                                                     />
                                                 </div>
                                             </div>

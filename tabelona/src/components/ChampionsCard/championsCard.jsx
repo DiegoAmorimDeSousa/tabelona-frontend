@@ -21,7 +21,6 @@ function ChampionsCard() {
     let positionBrasilB = 0;
     let positionMundoA = 0;
     let positionMundoB = 0;
-    let positionMundoC = 0;
     let positionCopaDoBrasil = 0;
     let positionLibertadores = 0;
     let positionCopaMundial = 0;
@@ -126,6 +125,7 @@ function ChampionsCard() {
                     {times.times !== undefined ? times.times.map(element => {
                         return element.titles.map(title => {
                             if(title.name === 'Série A - Mundo'){
+                                console.log(element);
                                 positionMundoA = positionMundoA + 1;
                                 return (
                                     <>
