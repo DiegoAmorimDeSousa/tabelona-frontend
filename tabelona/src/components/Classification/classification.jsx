@@ -31,9 +31,9 @@ function Classification() {
 
         const dateYear = new Date().getFullYear();
 
-        setValueSelect(dateYear);
-
         if(valueSelectBoolean){
+            setValueSelect(dateYear);
+
             dispatch(getTimes(dateYear));
         } 
 
@@ -143,8 +143,8 @@ function Classification() {
             setUpdatePontuationTime(true);
             setName(name);
             setResult(result);
-            setPontuation(pontuation);
-            setGames(games);
+            setPontuation(pontuation[0] === undefined || null ? pontuation[1] : pontuation[0]);
+            setGames(games[0] === undefined || null ? games[1] : games[0]);
             
         };
     }
@@ -220,8 +220,7 @@ function Classification() {
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 {element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
-                                                        console.log('ENTROU AQUI', yearClassification.year);
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 })}
@@ -231,11 +230,11 @@ function Classification() {
                                                     <label>V</label>
                                                     <input id={element.name + 'V'} type="checkbox" 
                                                     onClick={() => {classificationTime(element.name, 'V', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -245,11 +244,11 @@ function Classification() {
                                                     <label>E</label>
                                                     <input id={element.name + 'E'} type="checkbox"
                                                     onClick={() => {classificationTime(element.name, 'E', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -259,11 +258,11 @@ function Classification() {
                                                     <label>D</label>
                                                     <input id={element.name + 'D'} type="checkbox"
                                                     onClick={() => {classificationTime(element.name, 'D', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -314,7 +313,7 @@ function Classification() {
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 {element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 })}
@@ -324,11 +323,11 @@ function Classification() {
                                                     <label>V</label>
                                                     <input id={element.name + 'V'} type="checkbox" 
                                                     onClick={() => {classificationTime(element.name, 'V', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -338,11 +337,11 @@ function Classification() {
                                                     <label>E</label>
                                                     <input id={element.name + 'E'} type="checkbox"
                                                     onClick={() => {classificationTime(element.name, 'E', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -352,11 +351,11 @@ function Classification() {
                                                     <label>D</label>
                                                     <input id={element.name + 'D'} type="checkbox"
                                                     onClick={() => {classificationTime(element.name, 'D', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -407,7 +406,7 @@ function Classification() {
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 {element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 })}
@@ -417,11 +416,11 @@ function Classification() {
                                                     <label>V</label>
                                                     <input id={element.name + 'V'} type="checkbox" 
                                                     onClick={() => {classificationTime(element.name, 'V', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -431,11 +430,11 @@ function Classification() {
                                                     <label>E</label>
                                                     <input id={element.name + 'E'} type="checkbox"
                                                     onClick={() => {classificationTime(element.name, 'E', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -445,11 +444,11 @@ function Classification() {
                                                     <label>D</label>
                                                     <input id={element.name + 'D'} type="checkbox"
                                                     onClick={() => {classificationTime(element.name, 'D', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -500,7 +499,7 @@ function Classification() {
                                             </div>
                                             <div className="champions-card-time quantity first">
                                                 {element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 })}
@@ -510,11 +509,11 @@ function Classification() {
                                                     <label>V</label>
                                                     <input id={element.name + 'V'} type="checkbox" 
                                                     onClick={() => {classificationTime(element.name, 'V', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -524,11 +523,11 @@ function Classification() {
                                                     <label>E</label>
                                                     <input id={element.name + 'E'} type="checkbox"
                                                     onClick={() => {classificationTime(element.name, 'E', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
@@ -538,11 +537,11 @@ function Classification() {
                                                     <label>D</label>
                                                     <input id={element.name + 'D'} type="checkbox"
                                                     onClick={() => {classificationTime(element.name, 'D', element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.pontuation;
                                                     };
                                                 }), element.classification.map(yearClassification => {
-                                                    if(valueSelect === yearClassification.year){
+                                                    if(Number(valueSelect) === Number(yearClassification.year)){
                                                         return yearClassification.games;
                                                     };
                                                 }))}}
