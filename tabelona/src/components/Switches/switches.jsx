@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './switches.css';
 
 import { getTimes } from '../../store/GetTimes/GetTimesAction';
+import { changeScoreAction } from '../../store/ChangeScore/ChangeScoreAction';
 
 function Switches(){    
 
@@ -19,6 +20,7 @@ function Switches(){
     const [pontuation, setPontuation] = useState('');
     const [games, setGames] = useState('');
     const [updatePontuation, setUpdatePontuationTime] = useState(false);
+    const [score, setScore] = useState('');
 
     const arrayInitialAfter16 = [];
     const fakeArray = [];
@@ -39,13 +41,15 @@ function Switches(){
                             arrayInitialBefore16.push({
                                 moment: switching.moment,
                                 time: times.name,
-                                logo: times.logo
+                                logo: times.logo,
+                                score: switching.score
                             });
                         } else {
                             arrayInitialAfter16.push({
                                 moment: switching.moment,
                                 time: times.name,
-                                logo: times.logo
+                                logo: times.logo,
+                                score: switching.score
                             });
                         }
                     }
@@ -83,6 +87,7 @@ function Switches(){
                             pontuation: switching.pontuation,
                             games: switching.games,
                             wins: switching.wins,
+                            score: switching.score
                         });
                     } else {
                         arrayInitialAfter16.push({
@@ -92,6 +97,7 @@ function Switches(){
                             pontuation: switching.pontuation,
                             games: switching.games,
                             wins: switching.wins,
+                            score: switching.score
                         });
                     }
                 }
@@ -145,6 +151,21 @@ function Switches(){
             setGames(games[0] === undefined || null ? games[1] : games[0]);
             
         };
+    };
+
+    const onChangeScore = (e, time, arrayTimes) => {
+
+        setScore(e.target.value);
+
+        let objSwitching = '';
+
+        arrayTimes.map(element => {
+            if(element.name === time){
+                objSwitching = element.switching;
+            }
+        });
+
+        // dispatch(changeScoreAction(time, e.target.value, objSwitching, torney));
     }
 
     return (
@@ -170,7 +191,7 @@ function Switches(){
                                             <img style={{width: '30px', maxWidth: '20px', marginRight: '10px'}} src={element.logo} alt="" />
                                             {element.time}
                                         </div>
-                                        <input type="text" />
+                                        <input type="text" value={element.score.length === 0 ? 0 : element.score} onChange={(e) => {onChangeScore(e, element.time, times.times, torney)}} />
                                     </div>
                                 </div>
                             )
@@ -194,7 +215,7 @@ function Switches(){
                             return (
                                 <div className="switches-box">
                                     <div className="switches-card">
-                                        <input type="text" />
+                                        <input type="text" value={element.score.length === 0 ? 0 : element.score} onChange={(e) => {onChangeScore(e, element.time, times.times, torney)}} />
                                         <div className="name-time">
                                             {element.time}
                                             <img style={{width: '30px', maxWidth: '20px', marginLeft: '10px'}} src={element.logo} alt="" />

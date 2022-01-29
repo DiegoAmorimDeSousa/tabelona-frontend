@@ -8,7 +8,7 @@ import CreateTime from '../../components/CreateTime/createTime';
 import { getTimes } from '../../store/GetTimes/GetTimesAction';
 import { updatePontuationTime } from '../../store/UpdatePontuation/UpdatePontuationAction';
 
-function Classification() {
+function Classification(props) {
 
     const dispatch = useDispatch();
 
@@ -29,7 +29,13 @@ function Classification() {
 
     useEffect(() => {
 
-        const dateYear = new Date().getFullYear();
+        let dateYear = 0;
+
+        if(props.year === new Date().getFullYear()){
+            dateYear = props.year;
+        } else {
+            dateYear = new Date().getFullYear();
+        }
 
         if(valueSelectBoolean){
             setValueSelect(dateYear);

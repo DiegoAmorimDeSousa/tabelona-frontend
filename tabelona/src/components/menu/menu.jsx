@@ -1,22 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, fa } from '@fortawesome/free-solid-svg-icons'
 
-import './menu.css';
+import { MenuComponent } from './style';
 
 function Menu(){
     return (
         <>
-        <div className="menu">
-            <div>
-                Home
-            </div>
-            <div>
-                <Link to='/classification'>Pontos corridos</Link>
-            </div>
-            <div>
-                Mata - Mata
-            </div>
-        </div>
+            <MenuComponent>
+                <nav>
+                    <ul>
+                        <li>
+                            <FontAwesomeIcon icon={faHome} /> Home
+                        </li>
+                        <li>
+                            <FontAwesomeIcon icon={faHome} /> Dashboard
+                        </li>
+                    </ul>
+                </nav>
+            </MenuComponent>
         </>
     )
 }
