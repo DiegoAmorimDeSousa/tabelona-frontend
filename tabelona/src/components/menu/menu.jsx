@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faTag, faTable, faKey} from '@fortawesome/free-solid-svg-icons'
+import { faHome, faTag, faTable, faKey, faBars } from '@fortawesome/free-solid-svg-icons'
 
 import { MenuComponent } from './style';
 
@@ -8,7 +8,7 @@ import Logo from '../../assets/logo-tabelona.png';
 
 function Menu(){
 
-    const OnClickLinkMenu = (context) => {
+    const onClickLinkMenu = (context) => {
         const li = document.getElementsByTagName('li');
 
         for (let i = 0; i < li.length; i++) {
@@ -26,29 +26,40 @@ function Menu(){
         }
     }
 
+    const openNavBar = () => {
+        const nav = document.getElementsByTagName('nav');
+
+        for (let i = 0; i < nav.length; i++) {
+            const element = nav[i];
+
+            element.classList.toggle('nav-menu');
+            
+        }
+    }
+
     return (
         <>
             <MenuComponent>
                 <img src={Logo} alt="Logo Tabelona" />
                 <nav>
                     <ul>
-                        <li onClick={() => {OnClickLinkMenu('Home')}}>
+                        <li onClick={() => {onClickLinkMenu('Home')}}>
                             <div className="on"><FontAwesomeIcon icon={faHome} /></div> Home
                         </li>
-                        <li onClick={() => {OnClickLinkMenu('Dashboard')}}>
+                        <li onClick={() => {onClickLinkMenu('Dashboard')}}>
                             <div><FontAwesomeIcon icon={faTag} /></div> Dashboard
                         </li>
-                        <li onClick={() => {OnClickLinkMenu('Classificação')}}>
+                        <li onClick={() => {onClickLinkMenu('Classificação')}}>
                             <div><FontAwesomeIcon icon={faTable} /></div> Classificação
                         </li>
-                        <li onClick={() => {OnClickLinkMenu('Chaveamentos')}}>
+                        <li onClick={() => {onClickLinkMenu('Chaveamentos')}}>
                             <div><FontAwesomeIcon icon={faKey} /></div> Chaveamentos
                         </li>
                     </ul>
                 </nav>
-                <footer>
-                    <div></div>
-                </footer>
+                <div className="menu-hamburguer">
+                    <FontAwesomeIcon onClick={openNavBar} icon={faBars} />
+                </div>
             </MenuComponent>
         </>
     )

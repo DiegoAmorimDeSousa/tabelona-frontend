@@ -7,14 +7,16 @@ export const MenuComponent = styled.div`
     box-shadow: 0 0 0.4em #383232;
     font-size: 1.1rem;
     letter-spacing: 0.3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
+
+    .menu-hamburguer {
+        display: none;
+    }
 
     img {
         width: 150px;
         border-radius: 50px;
-        margin: 50px 0 20px;
+        margin-top: 20px;
     }
 
     li {
@@ -43,9 +45,43 @@ export const MenuComponent = styled.div`
         border-radius: 50px;
     }
 
-    footer div {
-        height: 2px;
+    @media (max-width: 768px) {
         width: 100%;
-        background-color: white;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .menu-hamburguer {
+            display: inline;
+            margin-right: 50px;
+        }
+
+        .menu-hamburguer svg {
+            font-size: 30px;
+        }
+
+        nav {
+            display: none;
+        }
+
+        .nav-menu {
+            display: inline;
+            position: absolute;
+            top: 100px;
+        }
+
+        .nav-menu ul {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: var(--color-bar-menu);
+        }
+
+        img {
+            width: 15%;
+            margin: 0 50px;
+            height: 80px;
+        }
+
     }
 `
