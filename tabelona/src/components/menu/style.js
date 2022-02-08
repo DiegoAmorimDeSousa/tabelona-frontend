@@ -2,12 +2,18 @@ import styled from 'styled-components';
 
 export const MenuComponent = styled.div`
     background-color: var(--color-bar-menu);
+    position: fixed;
     width: 280px;
     height: 100vh;
     box-shadow: 0 0 0.4em #383232;
     font-size: 1.1rem;
     letter-spacing: 0.3rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 
     .menu-hamburguer {
         display: none;
@@ -46,9 +52,9 @@ export const MenuComponent = styled.div`
     }
 
     @media (max-width: 768px) {
+        flex-direction: inherit;
         width: 100%;
         height: 100px;
-        display: flex;
         align-items: center;
         justify-content: space-between;
 
