@@ -1,14 +1,22 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faTag, faTable, faKey, faBars } from '@fortawesome/free-solid-svg-icons'
 
 import { MenuComponent } from './style';
+import { ShowMenuAction } from '../../store/ShowMenu/ShowMenuAction';
 
 import Logo from '../../assets/logo-tabelona.png';
 
 function Menu(){
 
+    const dispatch = useDispatch();
+
     const onClickLinkMenu = (context) => {
+
+        dispatch(ShowMenuAction(context));
+
         const li = document.getElementsByTagName('li');
 
         for (let i = 0; i < li.length; i++) {

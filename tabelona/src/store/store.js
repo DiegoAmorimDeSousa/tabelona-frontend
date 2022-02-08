@@ -7,12 +7,18 @@ import UpdatePontuationTimeReducer from './UpdatePontuation/UpdatePontuationRedu
 import RefreshClassificationReducer from './RefreshClassification/RefreshClassificationReducer';
 import ChangeScoreReducer from './ChangeScore/ChangeScoreReducer';
 
+import ShowMenuReducer from './ShowMenu/ShowMenuReducer';
+import StatusClassificationReducer from './StatusClassification/StatusClassificationReducer';
+
 const rootReducer = combineReducers({
     times: GetTimesReducer,
     createTime: CreateTimeReducer,
     updatePontuationTime: UpdatePontuationTimeReducer,
     refreshClassification: RefreshClassificationReducer,
-    changeScore: ChangeScoreReducer
+    changeScore: ChangeScoreReducer,
+
+    showMenu: ShowMenuReducer,
+    statusClassification: StatusClassificationReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(reduxPromise));

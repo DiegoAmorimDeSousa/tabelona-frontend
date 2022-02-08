@@ -3,12 +3,11 @@ import styled from 'styled-components';
 export const TableComponent = styled.div`
     font-family: var(--main-font-family);
     font-size: 1rem;
-    margin: 60px auto;
     background-color: var(--color-bar-menu);
     padding: 30px;
     border-radius: 50px;
     box-sizing: border-box;
-    
+    margin-bottom: 60px;
 
     header {
         display: flex;
@@ -25,6 +24,9 @@ export const TableComponent = styled.div`
         width: 30px;
         text-align: center;
         padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     main div {
@@ -41,10 +43,10 @@ export const TableComponent = styled.div`
 
     header div:nth-child(2), main div:nth-child(2)  {
         text-align: left;
-        min-width: 150px;
+        min-width: 200px;
         padding-left: 0;
-        display: flex;
         padding-left: 10px;
+        justify-content: start;
     }
 
     header div:last-child, main div:last-child {
@@ -53,16 +55,8 @@ export const TableComponent = styled.div`
         padding-left: 10px;
     }
 
-    main:nth-child(-n+2) > div {
-        background-color: #14274c;
-    }
-
-    main:nth-child(-n+3):nth-child(-n+5) > div {
-        background-color: #14274c;
-    }
-
     img {
-        width: 15px;
+        width: 20px;
         margin-right: 10px;
     }
 `;
@@ -75,7 +69,7 @@ export const DataTimeComponent = styled.div`
        }
 
        if(props.position + 1 < 15 && props.seriesType === 'A'){
-           return '#a8b707'
+           return '#b27b0c'
        }
 
        if(props.position + 1 > 24){

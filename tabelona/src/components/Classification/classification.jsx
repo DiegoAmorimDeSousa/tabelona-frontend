@@ -11,13 +11,9 @@ function Classification() {
     const dispatch = useDispatch();
 
     const times = useSelector(state => state.times);
+    const statusClassification = useSelector(state => state.statusClassification);
 
     const [typeHeader, setTypeHeader] = useState('headerTableTorney');
-    const [statusClassification, setStatusClassification] = useState({
-        country: 'Brasil',
-        seriesType: 'A',
-        year: 2021
-    });
     const [arrayTimes, setArrayTimes] = useState([{}]);
 
     useEffect(() => {
@@ -30,10 +26,10 @@ function Classification() {
 
         }
  
-    }, [times.success])
+    }, [times.success, statusClassification])
 
     return (
-        <> 
+        <>  
             <TableComponent>
                 <header>
                     {headerTable(typeHeader).map((element, index) => {
