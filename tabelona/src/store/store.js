@@ -9,6 +9,7 @@ import ChangeScoreReducer from './ChangeScore/ChangeScoreReducer';
 
 import ShowMenuReducer from './ShowMenu/ShowMenuReducer';
 import StatusClassificationReducer from './StatusClassification/StatusClassificationReducer';
+import LastUpdateReducer from './LastUpdate/LastUpdateReducer';
 
 const rootReducer = combineReducers({
     times: GetTimesReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     changeScore: ChangeScoreReducer,
 
     showMenu: ShowMenuReducer,
-    statusClassification: StatusClassificationReducer
+    statusClassification: StatusClassificationReducer,
+    lastUpdate: LastUpdateReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(reduxPromise));

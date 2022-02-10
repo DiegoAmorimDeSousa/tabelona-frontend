@@ -1,17 +1,27 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Menu from '../../components/menu/menu';
 import Classifications from '../../components/Classification/classification';
 import Filter from '../../components/filter/filter';
 
+import { getTimes } from '../../store/GetTimes/GetTimesAction';
+
 import { HomeComponent } from './style';
 
-function Home(){   
+function Home(){
+
+    const dispatch = useDispatch();
 
     const showMenu = useSelector(state => state.showMenu);
+    const times = useSelector(state => state.times);
+    const lastUpdate = useSelector(state => state.lastUpdate);
 
-    useEffect(() => {console.log('show menu:', showMenu);}, [showMenu])
+    useEffect(() => {
+        if(times.success === false){
+             dispatch(getTimes());
+        }
+    }, [times.success, showMenu])
 
     return (
         <>
@@ -29,6 +39,7 @@ function Home(){
                 showMenu === 'Chaveamentos' ?
                 ''
                 : ''}
+                <footer>Últma Alteração: <br />{lastUpdate}</footer>
             </HomeComponent>
         </>
     );

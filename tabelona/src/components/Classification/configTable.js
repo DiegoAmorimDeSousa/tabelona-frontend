@@ -43,4 +43,29 @@ function typeClassification(times, status, typeHeader) {
     return timeArray.sort();
 }
 
-export { headerTable, typeClassification }
+function selectLastUpdate(times) {
+
+    const arrayLastUpdate = [];
+
+    times.forEach(element => {
+        arrayLastUpdate.push(element.updatedAt);
+    });
+
+    arrayLastUpdate.sort(function (a, b) {
+        if (a.pontuation > b.pontuation) {
+            return -1;
+        }
+    });
+
+    let formatDate = 'Nenhuma data localizada';
+
+    if(arrayLastUpdate[0] !== undefined){
+        const splitDate = arrayLastUpdate[0].split('T')[0].split('-');
+
+        formatDate = splitDate[2] + '/' + splitDate[1] + '/' + splitDate[0]
+    } 
+
+    return formatDate;
+}
+
+export { headerTable, typeClassification, selectLastUpdate }

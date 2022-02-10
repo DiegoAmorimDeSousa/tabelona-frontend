@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TableComponent, DataTimeComponent } from './styles';
-import { getTimes } from '../../store/GetTimes/GetTimesAction';
+import { LastUpdateAction } from '../../store/LastUpdate/LastUpdateAction';
 
-import { headerTable, typeClassification } from './configTable';
+import { headerTable, typeClassification, selectLastUpdate } from './configTable';
 
 function Classification() {
 
@@ -18,12 +18,11 @@ function Classification() {
 
     useEffect(() => {
 
-        dispatch(getTimes());
-
         if(times.times !== undefined) {
 
             setArrayTimes(typeClassification(times.times, statusClassification, typeHeader));
 
+            dispatch(LastUpdateAction(selectLastUpdate(times.times)));
         }
  
     }, [times.success, statusClassification])
