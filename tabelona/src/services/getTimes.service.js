@@ -1,8 +1,8 @@
 import api from './api';
 
-export const getTimesService = async (dateYear) => {
+export const getTimesService = async () => {
 
-    const getTimes = await api.get('api/times/' + dateYear)
+    const getTimes = await api.get('api/times/')
     .then(result => {
         return result.data
     })

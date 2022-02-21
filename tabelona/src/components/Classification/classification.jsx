@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useDebugValue } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TableComponent, DataTimeComponent } from './styles';
 import { LastUpdateAction } from '../../store/LastUpdate/LastUpdateAction';
+import { updatePontuationTime } from '../../store/UpdatePontuation/UpdatePontuationAction';
+import { updateStatusStatistcsAction } from '../../store/StatusStatistcs/StatusStatitcsAction';
 
 import { headerTable, typeClassification, selectLastUpdate } from './configTable';
 
@@ -12,20 +14,32 @@ function Classification() {
 
     const times = useSelector(state => state.times);
     const statusClassification = useSelector(state => state.statusClassification);
+    const updatedPontuation = useSelector(state => state.updatePontuationTime);
 
     const [typeHeader, setTypeHeader] = useState('headerTableTorney');
     const [arrayTimes, setArrayTimes] = useState([{}]);
+    const [updateOn, setUpdateOn] = useState(false);
 
     useEffect(() => {
 
-        if(times.times !== undefined) {
+        if(times.times !== undefined && updateOn === false) {
 
-            setArrayTimes(typeClassification(times.times, statusClassification, typeHeader));
+            setArrayTimes(typeClassification(times.times, statusClassification));
 
             dispatch(LastUpdateAction(selectLastUpdate(times.times)));
         }
+
+        if(updatedPontuation.times !== undefined){
+            setArrayTimes(typeClassification(updatedPontuation.times, statusClassification));
+        }
  
-    }, [times.success, statusClassification])
+    }, [times.success, statusClassification, updatedPontuation.times])
+
+    const updatePontuation = (time, result) => {
+        dispatch(updatePontuationTime(time, result));
+
+        setUpdateOn(true);
+    }
 
     return (
         <>  
@@ -45,6 +59,7 @@ function Classification() {
                                 seriesType={element.seriesType}>{index + 1}</DataTimeComponent>
                             <DataTimeComponent 
                                 position={index}
+                                onClick={() => {dispatch(updateStatusStatistcsAction(element))}}
                                 seriesType={element.seriesType}> <img src={element.logo} /> {element.name}</DataTimeComponent>
                             <DataTimeComponent 
                                 position={index}
@@ -58,12 +73,15 @@ function Classification() {
                             <DataTimeComponent 
                                 position={index}
                                 seriesType={element.seriesType}>
-                                <label>V</label>
-                                <input type="radio" />
-                                <label>E</label>
-                                <input type="radio" />
-                                <label>D</label>
-                                <input type="radio" />
+                                <label 
+                                title="Clique aqui para adicionar vitória ao time" 
+                                onClick={() => updatePontuation(element, 'V')} >V</label>
+                                <label 
+                                title="Clique aqui para adicionar empate ao time" 
+                                onClick={() => updatePontuation(element, 'E')}>E</label>
+                                <label 
+                                title="Clique aqui para adicionar derrota ao time" 
+                                onClick={() => updatePontuation(element, 'D')}>D</label>
                             </DataTimeComponent>
                         </main>
                     )

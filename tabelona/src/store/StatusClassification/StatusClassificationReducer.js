@@ -1,7 +1,6 @@
 export default function (state = {
     country: 'Brasil',
-    seriesType: 'A',
-    year: 2021
+    seriesType: 'A'
 }, action) {
     switch (action.type) {
         case 'STATUS_CLASSIFICATION':

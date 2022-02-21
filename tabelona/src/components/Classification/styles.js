@@ -49,6 +49,10 @@ export const TableComponent = styled.div`
         justify-content: start;
     }
 
+    main div:nth-child(2) {
+        cursor: pointer;
+    }
+
     header div:last-child, main div:last-child {
         min-width: 90px;
         display: flex;
@@ -58,6 +62,11 @@ export const TableComponent = styled.div`
     img {
         width: 20px;
         margin-right: 10px;
+    }
+
+    label {
+        margin: 0 10px;
+        cursor: pointer;
     }
 `;
 

@@ -1,8 +1,10 @@
 import api from './api';
 
-export const updatePontuationTimes = async (name, result, pontuation, games, position) => {
-
-    const getTimes = await api.put('api/times/update-pontuation', {name, result, pontuation, games, position})
+export const updatePontuationTimes = async (time, result) => {
+    const updatePontuationTime = await api.put('api/times/update-pontuation', {
+        name: time.name,
+        result: result,
+    })
     .then(result => {
         return result.data
     })
@@ -10,5 +12,5 @@ export const updatePontuationTimes = async (name, result, pontuation, games, pos
         return err;
     });
 
-    return getTimes;
+    return updatePontuationTime;
 }

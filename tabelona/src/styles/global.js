@@ -29,6 +29,29 @@ const GlobalStyles = createGlobalStyle`
         cursor: pointer;
     }
 
+    input {
+        width: 100%;
+        border: none;
+        border-radius: 40px;
+        padding: 10px;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    button {
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 30px;
+    }
+
+    button:hover {
+        background-color: #5BC2E7;
+        border: solid 2px white;
+        color: white;
+        font-weight: bold;
+    }
+
     :root {
         /**** Colors ****/
         --color-logo: #5BC2E7;

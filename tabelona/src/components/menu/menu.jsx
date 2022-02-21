@@ -1,17 +1,24 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faTag, faTable, faKey, faBars } from '@fortawesome/free-solid-svg-icons'
 
 import { MenuComponent } from './style';
 import { ShowMenuAction } from '../../store/ShowMenu/ShowMenuAction';
+import { refreshClassificationAction } from '../../store/RefreshClassification/RefreshClassificationAction';
 
 import Logo from '../../assets/logo-tabelona.png';
 
 function Menu(){
 
     const dispatch = useDispatch();
+
+    const times = useSelector(state => state.times);
+
+    useEffect(() => {
+        console.log('Times', times);
+    }, [times.success])
 
     const onClickLinkMenu = (context) => {
 
@@ -65,6 +72,13 @@ function Menu(){
                         </li>
                     </ul>
                 </nav>
+                <div className="footer-menu">
+                    <FontAwesomeIcon 
+                    title="Clique aqui para recarregar a tabela" 
+                    icon={faKey}
+                    onClick={() => {dispatch(refreshClassificationAction(times.times))}} />
+                    <FontAwesomeIcon title="Clique aqui para recarregar criar um time" icon={faTable} />
+                </div>
                 <div className="menu-hamburguer">
                     <FontAwesomeIcon onClick={openNavBar} icon={faBars} />
                 </div>

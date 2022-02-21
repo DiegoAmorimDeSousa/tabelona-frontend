@@ -3,13 +3,15 @@ import reduxPromise from 'redux-promise';
 
 import GetTimesReducer from './GetTimes/GetTimesReducer';
 import CreateTimeReducer from './CreateTime/CreateTimeReducer';
-import UpdatePontuationTimeReducer from './UpdatePontuation/UpdatePontuationReducer';
+
 import RefreshClassificationReducer from './RefreshClassification/RefreshClassificationReducer';
 import ChangeScoreReducer from './ChangeScore/ChangeScoreReducer';
 
 import ShowMenuReducer from './ShowMenu/ShowMenuReducer';
 import StatusClassificationReducer from './StatusClassification/StatusClassificationReducer';
 import LastUpdateReducer from './LastUpdate/LastUpdateReducer';
+import UpdatePontuationTimeReducer from './UpdatePontuation/UpdatePontuationReducer';
+import StatusStatitcsReducer from './StatusStatistcs/StatusStatitcsReducer';
 
 const rootReducer = combineReducers({
     times: GetTimesReducer,
@@ -20,7 +22,9 @@ const rootReducer = combineReducers({
 
     showMenu: ShowMenuReducer,
     statusClassification: StatusClassificationReducer,
-    lastUpdate: LastUpdateReducer
+    lastUpdate: LastUpdateReducer,
+    updatePontuationTime: UpdatePontuationTimeReducer,
+    statusStatistcs: StatusStatitcsReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(reduxPromise));

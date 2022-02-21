@@ -51,6 +51,13 @@ export const MenuComponent = styled.div`
         border-radius: 50px;
     }
 
+    .footer-menu {
+        display: flex;
+        justify-content: space-between;
+        width: 100px;
+        cursor: pointer;
+    }
+
     @media (max-width: 768px) {
         flex-direction: inherit;
         width: 100%;

@@ -6,7 +6,7 @@ function headerTable(type) {
     }
 }
 
-function typeClassification(times, status, typeHeader) {
+function typeClassification(times, status) {
 
     const filterArrayTimes = [];
     const timeArray = [];
@@ -19,9 +19,14 @@ function typeClassification(times, status, typeHeader) {
         }
     });
 
+
     filterArrayTimes.forEach(item => {
+        console.log(item);
+        if(item.name === 'Criciúma'){
+            console.log(item);
+        }
         item.classification.forEach(option => {
-            if(option.year === 2021){
+            if(option.year === new Date().getFullYear()){
                 timeArray.push({
                     name: item.name,
                     logo: item.logo,
@@ -29,18 +34,28 @@ function typeClassification(times, status, typeHeader) {
                     pontuation: option.pontuation,
                     games: option.games,
                     wins: option.wins,
+                    titles: item.titles,
+                    classification: item.classification
                 })
-            }
+            } 
         })
     });
 
     timeArray.sort(function (a, b) {
-        if (a.pontuation > b.pontuation || a.games < a.gmes || a.wins > b.wins) {
+        if (a.pontuation > b.pontuation) {
             return -1;
+        } else if(a.pontuation === b.pontuation) {
+            if(a.games < b.games) {
+                return -1;
+            } else if(a.games === b.games){
+                if(a.wins > b.wins){
+                    return -1;
+                } 
+            }
         }
     })
 
-    return timeArray.sort();
+    return timeArray;
 }
 
 function selectLastUpdate(times) {
