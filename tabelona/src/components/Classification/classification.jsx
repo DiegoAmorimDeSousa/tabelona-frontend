@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useDebugValue } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TableComponent, DataTimeComponent } from './styles';
@@ -22,7 +22,7 @@ function Classification() {
 
     useEffect(() => {
 
-        if(times.times !== undefined && updateOn === false) {
+        if(times.times !== undefined && updateOn === false){
 
             setArrayTimes(typeClassification(times.times, statusClassification));
 
