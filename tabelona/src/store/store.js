@@ -12,6 +12,8 @@ import StatusClassificationReducer from './StatusClassification/StatusClassifica
 import LastUpdateReducer from './LastUpdate/LastUpdateReducer';
 import UpdatePontuationTimeReducer from './UpdatePontuation/UpdatePontuationReducer';
 import StatusStatitcsReducer from './StatusStatistcs/StatusStatitcsReducer';
+import PlayOffReducer from './ChangePlayOff/ChangePlayOffReducer';
+import StatusPlayOffReducer from './StatusPlayOff/StatusPlayOffReducer';
 
 const rootReducer = combineReducers({
     times: GetTimesReducer,
@@ -24,7 +26,9 @@ const rootReducer = combineReducers({
     statusClassification: StatusClassificationReducer,
     lastUpdate: LastUpdateReducer,
     updatePontuationTime: UpdatePontuationTimeReducer,
-    statusStatistcs: StatusStatitcsReducer
+    statusStatistcs: StatusStatitcsReducer,
+    playOff: PlayOffReducer,
+    statusPlayOff: StatusPlayOffReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(reduxPromise));

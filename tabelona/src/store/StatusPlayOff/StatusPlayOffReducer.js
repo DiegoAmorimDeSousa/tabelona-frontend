@@ -1,6 +1,6 @@
-export default function (state = 'Chaveamentos', action) {
+export default function (state = 'Fase Inicial', action) {
     switch (action.type) {
-        case 'SHOW_MENU':
+        case 'STATUS_PLAY_OFF':
             return action.payload;
         default:
             return state;

@@ -21,10 +21,6 @@ function typeClassification(times, status) {
 
 
     filterArrayTimes.forEach(item => {
-        console.log(item);
-        if(item.name === 'Criciúma'){
-            console.log(item);
-        }
         item.classification.forEach(option => {
             if(option.year === new Date().getFullYear()){
                 timeArray.push({

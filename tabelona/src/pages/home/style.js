@@ -3,11 +3,16 @@ import styled from 'styled-components';
 export const HomeComponent = styled.div`
     display: flex;
 
-    .container-classification {
+    .container-play-off {
+        text-align: center;
+        margin: 40px 0
+    }
+
+    .container-classification, .container-play-off {
         margin: auto;
     }
 
-    .container-classification-statistics {
+    .container-classification-statistics, .container-play-off-statistics {
         display: flex;
         margin-left: 270px;
     }
